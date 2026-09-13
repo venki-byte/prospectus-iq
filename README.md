@@ -1,12 +1,14 @@
 # ⚖️ ProspectusIQ — Autonomous IPO Forensic Auditor & Offering Screener
 ### *Institutional-Grade IPO Due Diligence, Capital Integrity Scoring & Prospectus Telemetry*
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://prospectus-iq-xqwmfq4edsmibywg7tqq7n.streamlit.app/)
 [![Python](https://img.shields.io/badge/Python-3.12%2B-blue.svg?logo=python&logoColor=white)](https://www.python.org/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-1.38%2B-FF4B4B.svg?logo=streamlit&logoColor=white)](https://streamlit.io/)
 [![Google Gemini](https://img.shields.io/badge/Google%20Gemini-Flash--Lite-4285F4.svg?logo=google&logoColor=white)](https://ai.google.dev/)
 [![PyMuPDF](https://img.shields.io/badge/PyMuPDF-Vector%20PDF-007ACC.svg)](https://pymupdf.readthedocs.io/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Tests](https://img.shields.io/badge/Tests-7%2F7%20Passing-success.svg)](tests/)
+
+> 🚀 **Live Production Terminal:** **[https://prospectus-iq-xqwmfq4edsmibywg7tqq7n.streamlit.app/](https://prospectus-iq-xqwmfq4edsmibywg7tqq7n.streamlit.app/)**
 
 ---
 
