@@ -1,0 +1,41 @@
+================================================================================
+PROSPECTUS CHAPTER EXTRACTION: NATIONAL STOCK EXCHANGE OF INDIA LIMITED (NSE)
+================================================================================
+
+[SECTION: OBJECTS OF THE ISSUE & USE OF PROCEEDS]
+The Offer comprises solely an Offer for Sale (OFS) of up to 49,450,000 Equity Shares aggregating approximately ₹10,000 Crores by existing financial shareholders including Life Insurance Corporation of India (LIC), State Bank of India (SBI), IFCI Limited, Norwest Venture Partners, and other institutional holders.
+Because this issue is 100% an Offer for Sale (OFS), the Company will not receive any proceeds from the Offer. All gross proceeds will be remitted to the Selling Shareholders pro-rata to their tendered shares after deducting issue-related expenses.
+The primary objectives of the listing are to achieve the benefits of listing the Equity Shares on the Stock Exchanges, enhance public visibility, provide liquidity to existing institutional shareholders, and comply with regulatory shareholding dispersal norms stipulated by SEBI.
+
+[SECTION: RISK FACTORS]
+1. Regulatory Oversight and Dependence on SEBI Approvals: As a Market Infrastructure Institution (MII), our operations, fee structures, transaction charges, derivative contract expiries, and introduction of new financial products are strictly governed and bounded by SEBI directives. Any regulatory mandates lowering derivative lot sizes, capping transaction charges, or increasing regulatory turnover fees directly compresses net fee revenue.
+2. System Outages, Cyber Attacks, and Algorithmic Glitches: High-frequency trading and low-latency colocation facilities require continuous zero-latency uptime. Past technical glitches (such as the telecom failure and clearing system freeze in Feb 2021) triggered regulatory penalties, forensic scrutiny, and reputational risk.
+3. Legacy Colocation Facility Inquiries and Litigations: Ongoing regulatory proceedings and disputed demands relating to the historical preferential access to colocation servers (the "Co-location / Dark Fiber" matter). While substantial deposits have been remitted pursuant to SAT and Supreme Court interim orders, final adverse rulings could impose financial liabilities or managerial restrictions.
+4. Volatility of Market Trading Volumes: Revenue is heavily driven by transaction charges from equity cash and derivatives segments. A prolonged equity bear market or structural reduction in retail derivatives speculation would materially reduce trading volumes and operating profit margins.
+5. Concentration of Revenue in F&O Derivatives: Over 75% of transaction revenues originate from index options and futures (NIFTY 50 and BANKNIFTY contracts). Recent SEBI 6-point consultation paper aimed at curbing retail index options exposure poses headwinds to incremental volume growth.
+
+[SECTION: CAPITAL STRUCTURE & SHAREHOLDING PATTERN]
+Total Paid-up Equity Capital: 495,000,000 Equity Shares of Face Value ₹1 each.
+The Company is a professionally governed, demutualized exchange institution without an identifiable promoter group or controlling family entity.
+Major Public and Institutional Shareholders:
+- Life Insurance Corporation of India (LIC): 10.08%
+- State Bank of India (SBI): 5.19%
+- Stock Holding Corporation of India: 4.44%
+- Verod Capital / Foreign Institutional Investors: 18.50%
+- Domestic Financial Institutions & Mutual Funds: 23.40%
+Pre-IPO Share Pricing: Unlisted market transactions for NSE unlisted shares traded between ₹2,800 to ₹3,400 over the preceding 12 months. Bonus issue of 4:1 was executed in FY24, expanding the share capital base without cash outflow.
+No shares held by directors or key institutions are pledged or encumbered.
+
+[SECTION: RELATED PARTY TRANSACTIONS]
+NSE conducts transactions with its direct subsidiaries and joint venture clearing corporations, including:
+- National Securities Clearing Corporation Limited (NSE Clearing / NSCCL): Clearing fee distributions and risk margin settlements of ₹1,850.40 Crores.
+- NSE Indices Limited: Index calculation, licensing, and brand royalties of ₹84.20 Crores.
+- NSEIT Limited: IT system development, maintenance, and software infrastructure support totaling ₹245.80 Crores.
+All inter-company transactions are audited under arms-length transfer pricing protocols and regulated under the SEBI (Securities Contracts Regulation - Stock Exchanges and Clearing Corporations) Regulations. No promoter loans, royalties to private trusts, or personal guarantees exist.
+
+[SECTION: OUTSTANDING LITIGATIONS AND DEFAULTS]
+1. SEBI Co-location Disgorgement & Legal Proceedings: Disputed disgorgement order originally levied by SEBI of ₹625 Crores plus 12% interest. The matter was partially set aside by the Securities Appellate Tribunal (SAT) and is currently sub-judice before the Supreme Court of India. NSE has deposited over ₹1,000 Crores into an escrow interest-bearing account.
+2. Direct and Indirect Tax Litigations: Income tax assessment disputes aggregating ₹512.40 Crores regarding deduction of contributions to the Investor Protection Fund and Core Settlement Guarantee Fund (SGF).
+3. Stamp Duty and Municipal Assessments: Disputed stamp duty levies from various state revenue commissioners amounting to ₹88.30 Crores.
+Total contingent liabilities (excluding escrow-funded items) represent approximately 7.2% of consolidated tangible net worth (₹14,500+ Crores).
+Consolidated Cash and Bank Balances exceed ₹12,000 Crores with zero external funded debt.

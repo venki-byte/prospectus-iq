@@ -1,0 +1,71 @@
+# =====================================================================
+# ProspectusIQ: Production Git Ignore
+# =====================================================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.pyd
+
+# C extensions
+*.obj
+*.o
+*.lib
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# Environment Variables & Secrets
+.env
+.env.local
+.env.*.local
+.streamlit/secrets.toml
+!.env.example
+
+# SQLite Database Journals & Locks
+data/*.db-journal
+*.sqlite-journal
+*.sqlite3-journal
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+nosetests.xml
+coverage.xml
+*.cover
+
+# IDEs and Text Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Temporary artifacts, logs, and generated PDFs
+test_output.pdf
+*.log
+*.tmp
+scratch/
+.tempmediaStorage/

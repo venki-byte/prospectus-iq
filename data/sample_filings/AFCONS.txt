@@ -1,0 +1,43 @@
+================================================================================
+PROSPECTUS CHAPTER EXTRACTION: AFCONS INFRASTRUCTURE LIMITED (DRHP / RHP)
+================================================================================
+
+[SECTION: OBJECTS OF THE ISSUE & USE OF PROCEEDS]
+The Offer comprises a Fresh Issue of Equity Shares aggregating up to ₹1,250.00 Crores and an Offer for Sale (OFS) of up to ₹4,180.00 Crores by Goswami Infratech Private Limited (the Promoter Selling Shareholder), aggregating to a total Offer size of ₹5,430.00 Crores.
+The OFS constitutes 76.98% of the total issue size. The net proceeds of the OFS will be received by Goswami Infratech (a Shapoorji Pallonji Group entity) and will be utilized primarily to deleverage debt obligations and bond repayments at the SP Group holding company level.
+The Net Proceeds from the Fresh Issue (₹1,250 Cr) are proposed to be utilized as follows:
+1. Capital expenditure towards purchase of construction equipment: ₹350.00 Crores.
+2. Funding long-term working capital requirements: ₹500.00 Crores.
+3. Prepayment or scheduled repayment of a portion of certain outstanding borrowings and term loans availed by the Company: ₹150.00 Crores.
+4. General corporate purposes: Balance amount (approx ₹250.00 Crores).
+
+[SECTION: RISK FACTORS]
+1. Shapoorji Pallonji (SP) Group Debt Pressures: Goswami Infratech and other SP Group entities carry substantial non-convertible debenture (NCD) and bank obligations. Adverse financial distress or credit downgrades at the parent promoter holding company could impact our bonding capabilities, bank guarantee facilities, and credit ratings.
+2. High Working Capital Intensity: Our operations require substantial working capital for executing complex EPC projects (marine, surface transport, tunnels, underground metro). Days Sales Outstanding (DSO) and unbilled work-in-progress receivables stood at 134 days and 142 days in FY23 and FY24. Delayed milestone certifications by government employers could result in severe operating cash flow deficits.
+3. Fixed-Price & EPC Contract Cost Overruns: Over 65% of our order book consists of item-rate or fixed-price EPC contracts. Variations in soil conditions, monsoons, geopolitical disruptions, steel and cement commodity price inflation, and environmental clearances can trigger margin contraction and liquidated damages.
+4. Client Concentration: The Top 5 projects and government agencies (including NHAI, RVNL, and municipal corporations) account for over 58% of our order book backlog (exceeding ₹34,000 Crores). Cancellations or delays in government budgetary disbursements pose significant risks.
+5. International Project Execution Geopolitics: Projects in the Middle East, Central Asia, and Africa expose the company to foreign exchange volatility, sovereign payment delays, and cross-border regulatory constraints.
+
+[SECTION: CAPITAL STRUCTURE & SHAREHOLDING PATTERN]
+Total Paid-up Equity Capital: 367,738,400 Equity Shares.
+Promoter and Promoter Group Shareholding:
+- Goswami Infratech Private Limited: 72.35%
+- Shapoorji Pallonji and Company Private Limited (SPCPL): 18.42%
+- Other SP Group promoter entities: 8.43%
+- Total Promoter Holding pre-IPO: 99.20%. Post-IPO promoter holding is expected to decline to approximately 79.5%.
+Pledged Shares: Significant equity shares of Goswami Infratech and certain inter-corporate investments within the broader SP Group holding entities are pledged or encumbered as collateral security for NCDs issued by Goswami Infratech. However, Afcons' direct equity shares are reported unencumbered under SEBI disclosure covenants.
+Pre-IPO Allotment: In May 2024, private placement allotments of equity shares to institutional investors were executed at ₹425 per share, representing a modest 8.9% discount to the upper price band of ₹463.
+
+[SECTION: RELATED PARTY TRANSACTIONS]
+Related party transactions during FY24 totaled ₹892.40 Crores, consisting of:
+- Subcontracting engineering fees and shared infrastructure cost apportionments with Shapoorji Pallonji and Company Private Limited (SPCPL): ₹412.30 Crores.
+- Equipment leasing and machine rentals paid to Forbes & Company / Sterling & Wilson affiliates: ₹118.20 Crores.
+- Corporate guarantees provided by the Company on behalf of joint ventures and subsidiary project SPVs: ₹2,150.00 Crores.
+- Outstanding inter-corporate deposits (ICDs) and trade advances from group companies: ₹162.50 Crores.
+
+[SECTION: OUTSTANDING LITIGATIONS AND DEFAULTS]
+1. Tax Demands: Total disputed income tax demands of ₹194.20 Crores and indirect tax (Service Tax / VAT / GST) assessments of ₹287.60 Crores pending before various appellate tribunals and High Courts.
+2. Contractor and Sub-contractor Arbitration Proceedings: Active arbitration disputes with joint venture partners, dredging contractors, and equipment vendors totaling claims of ₹445.80 Crores.
+3. Liquidated Damages Claims: Disputed claims from project owners regarding project milestone slippages amounting to ₹128.40 Crores.
+Total quantifiable contingent liabilities stand at ₹1,124.50 Crores, representing approximately 31.8% of consolidated net worth (₹3,530 Crores).
+Consolidated Cash Flow from Operations was positive at ₹842.10 Crores in FY24, reversing negative operating cash flow of ₹-112.40 Crores in FY23.

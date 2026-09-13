@@ -1,0 +1,46 @@
+================================================================================
+PROSPECTUS CHAPTER EXTRACTION: SWIGGY LIMITED (DRHP / RHP)
+================================================================================
+
+[SECTION: OBJECTS OF THE ISSUE & USE OF PROCEEDS]
+The Offer comprises a Fresh Issue of Equity Shares aggregating up to ₹4,499.00 Crores and an Offer for Sale (OFS) of up to 175,087,863 Equity Shares aggregating up to ₹6,828.43 Crores by the Selling Shareholders. Total Issue Size is ₹11,327.43 Crores at the upper price band of ₹390 per share.
+OFS represents approximately 60.28% of the total issue size. The Selling Shareholders include early venture capital investors (Prosus/Naspers, SoftBank, Accel, Elevation Capital, Tencent) and certain individual promoter/executive shareholders.
+The Net Proceeds from the Fresh Issue are proposed to be utilized as follows:
+1. Investment in Material Subsidiary, Scootsy Logistics Private Limited, for expansion of Dark Store network (Instamart): ₹1,178.70 Crores.
+2. Investment in technology and cloud infrastructure: ₹703.40 Crores.
+3. Brand marketing and business promotion expenses for enhancing brand awareness: ₹1,115.30 Crores.
+4. Repayment or pre-payment, in full or part, of certain borrowings availed by Scootsy: ₹137.50 Crores.
+5. Funding inorganic growth through acquisitions and general corporate purposes: ₹964.10 Crores.
+None of the Fresh Issue proceeds will be utilized for payments to founders or executive directors except for legitimate compensation or reimbursement of verified operational expenses.
+
+[SECTION: RISK FACTORS]
+1. History of Net Losses: We have incurred net losses in each year since our incorporation. For FY22, FY23, and FY24, our restated loss for the year was ₹3,628.90 Cr, ₹4,179.30 Cr, and ₹2,350.24 Cr respectively. If we are unable to generate sufficient revenue and achieve unit economic profitability across quick commerce and food delivery, our business, cash flows, and financial condition will continue to suffer.
+2. Negative Cash Flows from Operations: We experienced negative cash flows from operating activities of ₹2,284.15 Cr in FY22, ₹3,568.20 Cr in FY23, and ₹1,132.80 Cr in FY24. We anticipate operating cash outflows to persist in the near term as we aggressively expand quick-commerce dark store infrastructure.
+3. Intense Industry Competition: We face fierce competition from incumbent delivery platforms (principally Zomato / Blinkit) as well as emerging rapid delivery operators (Zepto) and quick-commerce arms of established e-commerce players (Tata BigBasket, Amazon, Flipkart Minutes). Increased discount wars and driver incentive subsidies may permanently erode take rates and EBITDA margins.
+4. Customer and Gig Worker Retention: High churn among delivery partners (gig workers) and rising fuel/labor costs could inflate delivery costs per order. Regulatory interventions demanding statutory social security benefits for gig workers under the Code on Social Security could materially increase operational overheads.
+5. Dark Store Lease Commitments and Urban Rent Inflation: Quick commerce viability depends on securing prime micro-warehousing spaces in dense tier-1 metropolitan neighborhoods at viable lease rates.
+
+[SECTION: CAPITAL STRUCTURE & SHAREHOLDING PATTERN]
+The pre-issue issued, subscribed, and paid-up Equity Share capital stands at 2,050,450,120 shares.
+Major pre-IPO shareholders:
+- MIH India Food Holdings B.V. (Prosus / Naspers): 30.95%
+- SoftBank Vision Fund (SVF II Songbird): 7.72%
+- Accel India: 6.13%
+- Elevation Capital: 4.10%
+- Tencent Cloud Europe B.V.: 3.82%
+- Founders and Key Management Personnel (Sriharsha Majety, Nandan Reddy, Phani Kishan): Combined 6.88%
+Pre-IPO allotment pricing: In the 18 months preceding the filing, employee stock options (ESOPs) and secondary transactions occurred between ₹190 to ₹345 per equity share. Series K institutional round was finalized at an implied valuation of approx ₹350 per share.
+Promoter Classification: Under SEBI ICDR regulations, the company is a professionally managed company without an identifiable institutional promoter; therefore, no promoter group shares are subject to promoter lock-in; however, key pre-IPO investors are subject to the standard statutory 6-month pre-issue lock-in.
+
+[SECTION: RELATED PARTY TRANSACTIONS]
+During FY24, related party transactions totaled ₹342.10 Crores, consisting of:
+- Logistics service payments to Scootsy Logistics Private Limited (wholly owned subsidiary).
+- Cloud and technical service fees paid to entities affiliated with board investors (Tencent Cloud / AWS affiliate programs) at arm's-length commercial terms.
+- Lease payments for corporate offices to holding entities amounting to ₹18.40 Crores.
+- No uncollateralized loans or interest-free advances were extended to executive directors or key management relatives.
+
+[SECTION: OUTSTANDING LITIGATIONS AND DEFAULTS]
+1. Tax Demands: Total disputed indirect tax (GST and Service Tax) and direct tax demands against the Company aggregate to ₹412.30 Crores. This includes a show-cause notice from the Directorate General of GST Intelligence (DGGI) regarding the classification of delivery fees collected on behalf of restaurant partners.
+2. Consumer Disputes: 1,240 consumer forum cases pending across various district and state consumer forums regarding order delays, deficient food quality, and refund claims, involving aggregate claims of ₹14.80 Crores.
+3. CCI Anti-Trust Investigation: The Competition Commission of India (CCI) has an ongoing probe into alleged anti-competitive conduct, bundling of services, and deep discounting practices in the online food delivery sector involving both Swiggy and Zomato.
+Contingent liabilities not provided for as of March 31, 2024 total ₹438.10 Crores, representing 4.8% of consolidated net worth.
