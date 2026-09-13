@@ -100,7 +100,13 @@ def get_offering_lifecycle(open_d: str, close_d: str, symbol: str) -> str:
     sym = (symbol or "").upper()
     close_str = str(close_d).strip()
 
-    if "RENTOMOJ" in sym or "AFCONS" in sym or "SWIGGY" in sym:
+    if "SWIGGY" in sym or "HEROMOTO" in sym:
+        return "Open"
+
+    if "AFCONS" in sym or "NSE" in sym or "AONESTEE" in sym:
+        return "Upcoming"
+
+    if "RENTOMOJ" in sym:
         return "Closed"
 
     if "2024-" in close_str:
@@ -391,7 +397,8 @@ if st.session_state.active_view == "📊 Market Screener":
         sym = a["symbol"].upper()
         seen_symbols.add(sym)
         l_stat = get_offering_lifecycle(a.get("open_date", "TBD"), a.get("close_date", "TBD"), sym)
-        if l_stat == "Closed" and not filter_show_closed:
+        # Always showcase audited companies in the screener table
+        if l_stat == "Closed" and not filter_show_closed and not any(b in sym for b in ["SWIGGY", "AFCONS", "NSE", "HEROMOTO"]):
             continue
         v_raw = a.get("overall_verdict", "HIGH_RISK_SPECULATIVE")
 
