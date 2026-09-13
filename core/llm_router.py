@@ -17,6 +17,7 @@ from config import (
     OPENROUTER_API_KEY,
     OPENROUTER_BASE_URL,
     OPENROUTER_MODEL,
+    get_secret,
 )
 from core.forensic_engine import ForensicEngine
 
@@ -45,11 +46,11 @@ class LLMRouter:
         """
         from dotenv import load_dotenv
         load_dotenv(override=True)
-        api_key = os.getenv("GEMINI_API_KEY", "").strip()
-        preferred_model = os.getenv("GEMINI_MODEL", "gemini-flash-lite-latest").strip()
+        api_key = get_secret("GEMINI_API_KEY", "").strip()
+        preferred_model = get_secret("GEMINI_MODEL", "gemini-flash-lite-latest").strip()
 
         if not api_key:
-            raise ValueError("GEMINI_API_KEY not configured in environment.")
+            raise ValueError("GEMINI_API_KEY not configured in environment or Streamlit secrets.")
 
         import google.generativeai as genai
         genai.configure(api_key=api_key)
@@ -104,19 +105,22 @@ class LLMRouter:
         """
         First Fallback: xAI Grok (via OpenAI SDK client).
         """
-        if not GROK_API_KEY or not GROK_API_KEY.strip():
-            raise ValueError("GROK_API_KEY not configured in environment.")
+        api_key = get_secret("GROK_API_KEY", "").strip()
+        base_url = get_secret("GROK_BASE_URL", GROK_BASE_URL).strip()
+        model = get_secret("GROK_MODEL", GROK_MODEL).strip()
+        if not api_key:
+            raise ValueError("GROK_API_KEY not configured in environment or Streamlit secrets.")
 
         from openai import OpenAI
 
         client = OpenAI(
-            api_key=GROK_API_KEY,
-            base_url=GROK_BASE_URL,
+            api_key=api_key,
+            base_url=base_url,
             timeout=timeout,
         )
 
         response = client.chat.completions.create(
-            model=GROK_MODEL,
+            model=model,
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt},
@@ -136,14 +140,17 @@ class LLMRouter:
         """
         Second Fallback: OpenRouter (via OpenAI SDK client).
         """
-        if not OPENROUTER_API_KEY or not OPENROUTER_API_KEY.strip():
-            raise ValueError("OPENROUTER_API_KEY not configured in environment.")
+        api_key = get_secret("OPENROUTER_API_KEY", "").strip()
+        base_url = get_secret("OPENROUTER_BASE_URL", OPENROUTER_BASE_URL).strip()
+        model = get_secret("OPENROUTER_MODEL", OPENROUTER_MODEL).strip()
+        if not api_key:
+            raise ValueError("OPENROUTER_API_KEY not configured in environment or Streamlit secrets.")
 
         from openai import OpenAI
 
         client = OpenAI(
-            api_key=OPENROUTER_API_KEY,
-            base_url=OPENROUTER_BASE_URL,
+            api_key=api_key,
+            base_url=base_url,
             timeout=timeout,
         )
 

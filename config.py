@@ -18,15 +18,28 @@ SAMPLE_FILINGS_DIR = DATA_DIR / "sample_filings"
 DATA_DIR.mkdir(exist_ok=True)
 SAMPLE_FILINGS_DIR.mkdir(exist_ok=True)
 
+def get_secret(key: str, default: str = "") -> str:
+    """Retrieve secret from environment variable or Streamlit secrets store."""
+    val = os.getenv(key)
+    if val:
+        return val.strip()
+    try:
+        import streamlit as st
+        if hasattr(st, "secrets") and key in st.secrets:
+            return str(st.secrets[key]).strip()
+    except Exception:
+        pass
+    return default
+
 # LLM Provider Configuration
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
-GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-flash-lite-latest")
-GROK_API_KEY = os.getenv("GROK_API_KEY", "")
-GROK_BASE_URL = os.getenv("GROK_BASE_URL", "https://api.x.ai/v1")
-GROK_MODEL = os.getenv("GROK_MODEL", "grok-beta")
-OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY", "")
-OPENROUTER_BASE_URL = os.getenv("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1")
-OPENROUTER_MODEL = os.getenv("OPENROUTER_MODEL", "meta-llama/llama-3.1-70b-instruct")
+GEMINI_API_KEY = get_secret("GEMINI_API_KEY", "")
+GEMINI_MODEL = get_secret("GEMINI_MODEL", "gemini-flash-lite-latest")
+GROK_API_KEY = get_secret("GROK_API_KEY", "")
+GROK_BASE_URL = get_secret("GROK_BASE_URL", "https://api.x.ai/v1")
+GROK_MODEL = get_secret("GROK_MODEL", "grok-beta")
+OPENROUTER_API_KEY = get_secret("OPENROUTER_API_KEY", "")
+OPENROUTER_BASE_URL = get_secret("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1")
+OPENROUTER_MODEL = get_secret("OPENROUTER_MODEL", "meta-llama/llama-3.1-70b-instruct")
 
 # Categorical Enum Definitions
 VERDICTS = [
