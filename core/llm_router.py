@@ -8,6 +8,7 @@ import json
 import logging
 import os
 from typing import Any, Dict, Optional, Tuple
+from openai import OpenAI
 
 from config import (
     GEMINI_API_KEY,
@@ -146,16 +147,18 @@ class LLMRouter:
         if not api_key:
             raise ValueError("OPENROUTER_API_KEY not configured in environment or Streamlit secrets.")
 
-        from openai import OpenAI
-
         client = OpenAI(
             api_key=api_key,
             base_url=base_url,
             timeout=timeout,
+            default_headers={
+                "HTTP-Referer": "https://prospectus-iq.streamlit.app",
+                "X-Title": "ProspectusIQ",
+            },
         )
 
         response = client.chat.completions.create(
-            model=OPENROUTER_MODEL,
+            model=model,
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt},
@@ -197,9 +200,10 @@ class LLMRouter:
 
         # 2. First Fallback: xAI Grok
         try:
-            logger.info("Routing prompt to First Fallback: xAI Grok...")
+            current_grok_model = get_secret("GROK_MODEL", GROK_MODEL)
+            logger.info(f"Routing prompt to First Fallback: xAI Grok ({current_grok_model})...")
             result = cls.call_grok(system_prompt, user_prompt)
-            result["_provider_used"] = f"xAI Grok ({GROK_MODEL})"
+            result["_provider_used"] = f"xAI Grok ({current_grok_model})"
             return result
         except Exception as e:
             err_str = str(e)
@@ -208,9 +212,10 @@ class LLMRouter:
 
         # 3. Second Fallback: OpenRouter
         try:
-            logger.info("Routing prompt to Second Fallback: OpenRouter...")
+            current_or_model = get_secret("OPENROUTER_MODEL", OPENROUTER_MODEL)
+            logger.info(f"Routing prompt to Second Fallback: OpenRouter ({current_or_model})...")
             result = cls.call_openrouter(system_prompt, user_prompt)
-            result["_provider_used"] = f"OpenRouter ({OPENROUTER_MODEL})"
+            result["_provider_used"] = f"OpenRouter ({current_or_model})"
             return result
         except Exception as e:
             err_str = str(e)

@@ -36,10 +36,10 @@ GEMINI_API_KEY = get_secret("GEMINI_API_KEY", "")
 GEMINI_MODEL = get_secret("GEMINI_MODEL", "gemini-flash-lite-latest")
 GROK_API_KEY = get_secret("GROK_API_KEY", "")
 GROK_BASE_URL = get_secret("GROK_BASE_URL", "https://api.x.ai/v1")
-GROK_MODEL = get_secret("GROK_MODEL", "grok-beta")
+GROK_MODEL = get_secret("GROK_MODEL", "grok-2-latest")
 OPENROUTER_API_KEY = get_secret("OPENROUTER_API_KEY", "")
 OPENROUTER_BASE_URL = get_secret("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1")
-OPENROUTER_MODEL = get_secret("OPENROUTER_MODEL", "meta-llama/llama-3.1-70b-instruct")
+OPENROUTER_MODEL = get_secret("OPENROUTER_MODEL", "meta-llama/llama-3.1-8b-instruct")
 
 # Categorical Enum Definitions
 VERDICTS = [
