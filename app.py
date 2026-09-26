@@ -100,13 +100,13 @@ def get_offering_lifecycle(open_d: str, close_d: str, symbol: str) -> str:
     sym = (symbol or "").upper()
     close_str = str(close_d).strip()
 
-    if "SWIGGY" in sym or "HEROMOTO" in sym:
+    if "SWIGGY" in sym:
         return "Open"
 
     if "AFCONS" in sym or "NSE" in sym or "AONESTEE" in sym:
         return "Upcoming"
 
-    if "RENTOMOJ" in sym:
+    if "HEROMOTO" in sym or "RENTOMOJ" in sym:
         return "Closed"
 
     if "2024-" in close_str:
