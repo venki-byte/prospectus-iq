@@ -184,21 +184,15 @@ def deduplicate_offerings(
         match = find_equivalent_entity(inc_name, canonical_sym, merged)
         if match:
             idx, existing = match
-            if canonical_sym == "NSE":
-                existing["open_date"] = "17 Sep"
-                existing["close_date"] = "21 Sep"
-                existing["price_band"] = "₹1,785"
-                existing["issue_size"] = "₹10,000 Cr"
-            else:
-                # Merge live date information if incoming has it and existing has placeholders
-                if inc.get("open_date") and inc["open_date"] not in ["TBA", "TBD", "Upcoming", ""]:
-                    existing["open_date"] = inc["open_date"]
-                if inc.get("close_date") and inc["close_date"] not in ["TBA", "TBD", ""]:
-                    existing["close_date"] = inc["close_date"]
-                if inc.get("price_band") and inc["price_band"] not in ["TBA", "TBD", "Book Building", ""]:
-                    existing["price_band"] = inc["price_band"]
-                if inc.get("issue_size") and inc["issue_size"] not in ["TBA", "TBD", ""]:
-                    existing["issue_size"] = inc["issue_size"]
+            # Merge live date information if incoming has it and existing has placeholders
+            if inc.get("open_date") and inc["open_date"] not in ["TBA", "TBD", "Upcoming", ""]:
+                existing["open_date"] = inc["open_date"]
+            if inc.get("close_date") and inc["close_date"] not in ["TBA", "TBD", ""]:
+                existing["close_date"] = inc["close_date"]
+            if inc.get("price_band") and inc["price_band"] not in ["TBA", "TBD", "Book Building", ""]:
+                existing["price_band"] = inc["price_band"]
+            if inc.get("issue_size") and inc["issue_size"] not in ["TBA", "TBD", ""]:
+                existing["issue_size"] = inc["issue_size"]
         else:
             merged.append(inc)
 

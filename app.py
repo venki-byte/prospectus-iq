@@ -298,9 +298,9 @@ with st.sidebar:
 
     filter_hide_high_risk = st.checkbox("Hide High Risk (<50 Score)", value=False)
     filter_show_closed = st.checkbox(
-        "Include Closed IPOs (Archive)",
-        value=False,
-        help="By default, closed offerings are omitted to focus exclusively on active and upcoming opportunities.",
+        "Include Completed Listings",
+        value=True,
+        help="Include historical and recently completed public listings alongside active offerings.",
     )
 
     st.divider()
@@ -437,14 +437,27 @@ if st.session_state.active_view == "📊 Market Screener":
             with st.spinner("Surveilling public exchange registries (NSE/BSE & Chittorgarh)..."):
                 new_ipos = IPOScraper.fetch_active_and_upcoming_ipos()
                 st.session_state.available_ipos = new_ipos
+                audited_count = len(cache_mgr.get_all_audits())
+
+                # Find first active or upcoming offering dynamically
+                target_cand = next(
+                    (cand for cand in new_ipos if get_offering_lifecycle(cand.get("open_date", "TBD"), cand.get("close_date", "TBD"), cand.get("symbol", "")) in ["Open", "Upcoming"]),
+                    new_ipos[0] if new_ipos else None
+                )
+
+                target_sym = target_cand.get("symbol", "IPO") if target_cand else "IPO"
+                target_name = target_cand.get("company_name", "Public Offering") if target_cand else "Public Offering"
+
                 st.session_state["scan_banner"] = (
                     f"⚡ Surveillance Scan Complete! Ingested live exchange filings: "
                     f"{len(new_ipos)} public offerings tracked across registries. "
-                    f"18 institutional forensic audits loaded. Showing newly scanned offering: Acevector (Snapdeal)."
+                    f"{audited_count} institutional forensic audits indexed. "
+                    f"Selected active offering: {target_name} ({target_sym})."
                 )
                 st.session_state["_pending_sort"] = "Recently Scanned / New Filings"
-                st.session_state["selected_company"] = "ACEVECTO"
-                st.session_state["_pending_inspect"] = "Acevector (Snapdeal) (ACEVECTO)"
+                if target_cand:
+                    st.session_state["selected_company"] = target_sym
+                    st.session_state["_pending_inspect"] = f"{target_name} ({target_sym})"
                 st.session_state["_last_clicked_table_row"] = None
                 st.toast("⚡ Exchange Registry Scanned: Live filings updated & loaded!", icon="🚀")
                 st.rerun()
@@ -457,8 +470,7 @@ if st.session_state.active_view == "📊 Market Screener":
         sym = a["symbol"].upper()
         seen_symbols.add(sym)
         l_stat = get_offering_lifecycle(a.get("open_date", "TBD"), a.get("close_date", "TBD"), sym)
-        # Always showcase audited companies in the screener table
-        if l_stat == "Closed" and not filter_show_closed and not any(b in sym for b in ["SWIGGY", "AFCONS", "NSE", "HEROMOTO"]):
+        if l_stat == "Closed" and not filter_show_closed:
             continue
         v_raw = a.get("overall_verdict", "HIGH_RISK_SPECULATIVE")
 
@@ -538,16 +550,15 @@ if st.session_state.active_view == "📊 Market Screener":
 
     # Apply Sorting Logic
     if "Recently Scanned" in sort_by:
-        recent_priority = ["ACEVECTO", "MONEYVIE", "NITYASGE", "SRIT", "VISHALNI"]
         def recent_key(x):
-            sym = x["_symbol"].upper()
-            if sym in recent_priority:
-                return (0, recent_priority.index(sym))
+            # 1. Active Open offerings first, ordered by safety score
             if x["Status"] == "Open":
-                return (1, 0)
+                return (0, -x["_score"])
+            # 2. Upcoming offerings second
             if x["Status"] == "Upcoming":
-                return (2, 0)
-            return (3, -x["_score"])
+                return (1, -x["_score"])
+            # 3. Completed listings last
+            return (2, -x["_score"])
         filtered_rows.sort(key=recent_key)
     elif "Safety Score" in sort_by:
         filtered_rows.sort(key=lambda x: (x["_is_audited"], x["_score"]), reverse=True)
@@ -587,9 +598,10 @@ if st.session_state.active_view == "📊 Market Screener":
     if "_pending_inspect" in st.session_state:
         st.session_state["inspect_text_input"] = st.session_state.pop("_pending_inspect")
 
-    curr_target_sym = st.session_state.get("selected_company", "NSE").upper()
+    default_sym = combined_rows[0]["_symbol"] if combined_rows else "NSE"
+    curr_target_sym = st.session_state.get("selected_company", default_sym).upper()
     curr_target_row = symbol_to_row.get(curr_target_sym, combined_rows[0] if combined_rows else None)
-    curr_target_label = curr_target_row["Company & Ticker"] if curr_target_row else "National Stock Exchange of India Limited (NSE)"
+    curr_target_label = curr_target_row["Company & Ticker"] if curr_target_row else (combined_rows[0]["Company & Ticker"] if combined_rows else default_sym)
 
     if "inspect_text_input" not in st.session_state or not st.session_state["inspect_text_input"]:
         st.session_state["inspect_text_input"] = curr_target_label
@@ -966,16 +978,11 @@ elif st.session_state.active_view == "🔍 Forensic Deep-Dive":
                 st.rerun()
 
         # Offering Status Notice
-        if "RENTOMOJ" in curr_sym:
-            st.write("")
-            st.warning(
-                "ℹ️ **Offering Status Notice**: Rentomojo's public subscription window has concluded (closed Sep 11). "
-                "Analysis focused on post-listing valuation, secondary market entry, and capital allocation."
-            )
-        elif lifecycle == "Closed":
+        if lifecycle == "Closed":
             st.write("")
             st.info(
-                f"ℹ️ **Offering Status Notice**: Subscription bidding for {company_name} is closed. Analysis reflects secondary market valuation and governance risks."
+                f"ℹ️ **Offering Status Notice**: Subscription bidding for {company_name} is closed. "
+                "Forensic analysis reflects post-listing secondary market valuation, lock-in expiries, and capital allocation."
             )
 
         st.write("")

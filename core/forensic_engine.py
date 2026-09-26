@@ -422,8 +422,8 @@ class ForensicEngine:
                         "parameter_name": "Pre-IPO Allotment Disparity",
                         "category": "Capital Integrity",
                         "status": "GREEN",
-                        "finding": "Unlisted share trading between ₹2,800 to ₹3,400 aligns closely with the upper price band of ₹3,300.",
-                        "evidence_quote": "Unlisted market transactions for NSE shares traded between ₹2,800 to ₹3,400 over the preceding 12 months.",
+                        "finding": "The IPO issue price of ₹1,785 was set at an attractive discount to historical unlisted trades (₹2,800 to ₹3,400), leaving substantial room for listing gains.",
+                        "evidence_quote": "IPO issue price of ₹1,785 versus unlisted secondary market transactions.",
                         "severity": "LOW"
                     },
                     {
