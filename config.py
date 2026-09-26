@@ -187,14 +187,14 @@ BENCHMARK_IPOS = [
     {
         "symbol": "NSE",
         "company_name": "National Stock Exchange of India Limited",
-        "open_date": "Upcoming",
-        "close_date": "TBD",
+        "open_date": "2026-09-17",
+        "close_date": "2026-09-21",
         "issue_size": "₹10,000 Cr",
-        "price_band": "₹3,150 - ₹3,300",
-        "issue_type": "Book Built",
+        "price_band": "₹1,785",
+        "issue_type": "Book Built (OFS)",
         "sector": "Financial Infrastructure / Exchange",
         "peers": ["BSE.NS", "MCX.NS"],
-        "summary": "India's premier market infrastructure institution and the world's largest derivatives exchange by volume."
+        "summary": "India's premier market infrastructure institution and world's largest derivatives exchange. Listed on BSE on Sep 24, 2026."
     },
     {
         "symbol": "AFCONS",

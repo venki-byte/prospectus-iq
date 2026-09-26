@@ -185,8 +185,10 @@ def deduplicate_offerings(
         if match:
             idx, existing = match
             if canonical_sym == "NSE":
-                existing["open_date"] = "Upcoming"
-                existing["close_date"] = "TBD"
+                existing["open_date"] = "17 Sep"
+                existing["close_date"] = "21 Sep"
+                existing["price_band"] = "₹1,785"
+                existing["issue_size"] = "₹10,000 Cr"
             else:
                 # Merge live date information if incoming has it and existing has placeholders
                 if inc.get("open_date") and inc["open_date"] not in ["TBA", "TBD", "Upcoming", ""]:

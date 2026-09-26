@@ -141,8 +141,6 @@ def parse_date_safely(d_str: Any, default_year: Optional[int] = None) -> Optiona
 def get_offering_lifecycle(open_d: str, close_d: str, symbol: str = "") -> str:
     """Classifies IPO lifecycle dynamically based on real calendar dates."""
     sym = (symbol or "").upper()
-    if sym == "NSE":
-        return "Upcoming"
 
     today = datetime.date.today()
     c_date = parse_date_safely(close_d)
