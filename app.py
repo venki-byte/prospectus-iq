@@ -95,62 +95,99 @@ def switch_view(new_view: str, target_company: Optional[str] = None):
     st.rerun()
 
 
-def get_offering_lifecycle(open_d: str, close_d: str, symbol: str) -> str:
-    """Classifies IPO lifecycle as clean labels: Open, Upcoming, or Closed."""
+def parse_date_safely(d_str: Any, default_year: Optional[int] = None) -> Optional[datetime.date]:
+    """Robustly parses date strings into real datetime.date objects."""
+    if not d_str:
+        return None
+    if default_year is None:
+        default_year = datetime.date.today().year
+    s = str(d_str).strip()
+    if not s or s.upper() in ["TBD", "TBA", "UPCOMING", "NONE", "NAN"]:
+        return None
+    # Filter out numeric anomalies like issue sizes or Excel numbers (e.g. 50403)
+    if re.match(r"^\d{4,6}$", s):
+        return None
+    # ISO Format: YYYY-MM-DD
+    m_iso = re.match(r"^(\d{4})-(\d{1,2})-(\d{1,2})$", s)
+    if m_iso:
+        try:
+            return datetime.date(int(m_iso.group(1)), int(m_iso.group(2)), int(m_iso.group(3)))
+        except ValueError:
+            return None
+    # Text Format e.g. "18 Sep" or "Sep 18" or "05 Oct"
+    m_txt = re.search(r"(\d{1,2})\s*([A-Za-z]{3,})", s)
+    if not m_txt:
+        m_txt = re.search(r"([A-Za-z]{3,})\s*(\d{1,2})", s)
+        if m_txt:
+            day = int(m_txt.group(2))
+            mon_str = m_txt.group(1)[:3].title()
+        else:
+            return None
+    else:
+        day = int(m_txt.group(1))
+        mon_str = m_txt.group(2)[:3].title()
+    months = {
+        "Jan": 1, "Feb": 2, "Mar": 3, "Apr": 4, "May": 5, "Jun": 6,
+        "Jul": 7, "Aug": 8, "Sep": 9, "Oct": 10, "Nov": 11, "Dec": 12
+    }
+    if mon_str in months:
+        try:
+            return datetime.date(default_year, months[mon_str], day)
+        except ValueError:
+            return None
+    return None
+
+
+def get_offering_lifecycle(open_d: str, close_d: str, symbol: str = "") -> str:
+    """Classifies IPO lifecycle dynamically based on real calendar dates."""
     sym = (symbol or "").upper()
-    close_str = str(close_d).strip()
-
-    if "SWIGGY" in sym:
-        return "Open"
-
-    if "AFCONS" in sym or "NSE" in sym or "AONESTEE" in sym:
+    if sym == "NSE":
         return "Upcoming"
 
-    if "HEROMOTO" in sym or "RENTOMOJ" in sym:
-        return "Closed"
+    today = datetime.date.today()
+    c_date = parse_date_safely(close_d)
+    o_date = parse_date_safely(open_d)
 
-    if "2024-" in close_str:
+    # Cross-fill month if open date has only day digits
+    if not o_date and c_date and re.match(r"^\d{1,2}$", str(open_d).strip()):
         try:
-            dt = datetime.datetime.strptime(close_str, "%Y-%m-%d")
-            if dt.date() < datetime.date.today():
-                return "Closed"
-            return "Open"
-        except Exception:
+            o_date = datetime.date(c_date.year, c_date.month, int(str(open_d).strip()))
+        except ValueError:
             pass
 
-    match = re.search(r"(\d{1,2})\s*([A-Za-z]+)", close_str)
-    if match:
-        day = int(match.group(1))
-        mon = match.group(2).lower()
-        if "sep" in mon:
-            if day < 12:
-                return "Closed"
-            elif day <= 18:
-                return "Open"
-            else:
-                return "Upcoming"
+    if c_date and c_date < today:
+        return "Closed"
+    if o_date and c_date and (o_date <= today <= c_date):
+        return "Open"
+    if o_date and o_date > today:
+        return "Upcoming"
+    if o_date and not c_date:
+        return "Open" if o_date <= today else "Upcoming"
 
     return "Upcoming"
 
 
 def format_bidding_dates(open_d: str, close_d: str) -> str:
-    """Formats dates into concise strings e.g. 'Sep 16 - Sep 18' or 'Nov 06 - Nov 08'."""
-    o_str = str(open_d).strip()
-    c_str = str(close_d).strip()
-    if not o_str or o_str.upper() in ["TBD", "NONE", "NAN"]:
-        return "Upcoming"
+    """Formats dates into concise, professional strings e.g. 'Sep 16 - 18' or 'Nov 06 - 08, 2024'."""
+    c_date = parse_date_safely(close_d)
+    o_date = parse_date_safely(open_d)
+    if not o_date and c_date and re.match(r"^\d{1,2}$", str(open_d).strip()):
+        try:
+            o_date = datetime.date(c_date.year, c_date.month, int(str(open_d).strip()))
+        except ValueError:
+            pass
 
-    try:
-        if "2024-" in o_str and "2024-" in c_str:
-            d1 = datetime.datetime.strptime(o_str, "%Y-%m-%d")
-            d2 = datetime.datetime.strptime(c_str, "%Y-%m-%d")
-            return f"{d1.strftime('%b %d')} - {d2.strftime('%b %d')}"
-    except Exception:
-        pass
-
-    if c_str and c_str != o_str and c_str.upper() != "TBD":
-        return f"{o_str} - {c_str}"
-    return o_str
+    if o_date and c_date:
+        if o_date.year != datetime.date.today().year:
+            return f"{o_date.strftime('%b %d')} - {c_date.strftime('%b %d, %Y')}"
+        if o_date.month == c_date.month:
+            return f"{o_date.strftime('%b %d')} - {c_date.strftime('%d')}"
+        return f"{o_date.strftime('%b %d')} - {c_date.strftime('%b %d')}"
+    elif o_date:
+        return o_date.strftime("%b %d")
+    elif c_date:
+        return f"Closes {c_date.strftime('%b %d')}"
+    return "Upcoming"
 
 
 def execute_audit(ipo_meta: Dict[str, Any], pdf_file: Optional[Any], bypass_cache: bool):

@@ -63,14 +63,22 @@ class IPOScraper:
 
                             symbol = generate_canonical_symbol(clean_name)
 
-                            open_d = "TBD"
+                            open_d = "Upcoming"
                             close_d = "TBD"
                             if "-" in date_str:
                                 parts = date_str.split("-")
                                 open_d = parts[0].strip()
                                 close_d = parts[1].strip()
-                            elif date_str:
+                                mon_match = re.search(r"([A-Za-z]{3,})", close_d)
+                                if mon_match and re.match(r"^\d{1,2}$", open_d):
+                                    open_d = f"{open_d} {mon_match.group(1)}"
+                            elif date_str and not re.match(r"^\d{4,}$", date_str):
                                 open_d = date_str
+
+                            if re.match(r"^\d{4,}$", str(open_d)):
+                                open_d = "Upcoming"
+                            if re.match(r"^\d{4,}$", str(close_d)):
+                                close_d = "TBD"
 
                             scraped_ipos.append({
                                 "symbol": symbol,
@@ -89,12 +97,18 @@ class IPOScraper:
                         elif len(cols) >= 6:
                             clean_name = re.sub(r"\s+IPO$", "", raw_name, flags=re.IGNORECASE).strip()
                             symbol = generate_canonical_symbol(clean_name)
+                            raw_o = cols[1] if len(cols) > 1 else "Upcoming"
+                            raw_c = cols[2] if len(cols) > 2 else "TBD"
+                            if re.match(r"^\d{4,}$", raw_o):
+                                raw_o = "Upcoming"
+                            if re.match(r"^\d{4,}$", raw_c):
+                                raw_c = "TBD"
 
                             scraped_ipos.append({
                                 "symbol": symbol,
                                 "company_name": clean_name,
-                                "open_date": cols[1] if len(cols) > 1 else "TBA",
-                                "close_date": cols[2] if len(cols) > 2 else "TBA",
+                                "open_date": raw_o,
+                                "close_date": raw_c,
                                 "price_band": cols[4] if len(cols) > 4 else "TBA",
                                 "issue_size": cols[5] if len(cols) > 5 else "TBA",
                                 "issue_type": "Book Built",
