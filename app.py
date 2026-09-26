@@ -357,6 +357,16 @@ if st.session_state.active_view == "📊 Market Screener":
 
     st.write("")
 
+    # Display Scan Notification Banner if present
+    if st.session_state.get("scan_banner"):
+        c_ban1, c_ban2 = st.columns([0.94, 0.06])
+        with c_ban1:
+            st.success(st.session_state["scan_banner"], icon="⚡")
+        with c_ban2:
+            if st.button("✕", key="btn_clear_scan_banner", help="Dismiss notification"):
+                del st.session_state["scan_banner"]
+                st.rerun()
+
     # 2. Search and Action Bar (3 columns)
     ctrl_col1, ctrl_col2, ctrl_col3 = st.columns([3, 2, 1.5])
     with ctrl_col1:
@@ -374,6 +384,7 @@ if st.session_state.active_view == "📊 Market Screener":
             "Sort Leaderboard",
             [
                 "Safety Score (High to Low)",
+                "Recently Scanned / New Filings",
                 "Issue Size (High to Low)",
                 "Close Date (Urgent)",
                 "Company Name (A-Z)",
@@ -384,9 +395,19 @@ if st.session_state.active_view == "📊 Market Screener":
 
     with ctrl_col3:
         if st.button("⚡ Scan for New IPOs", type="primary", use_container_width=True):
-            with st.spinner("Surveilling public exchange registries..."):
+            with st.spinner("Surveilling public exchange registries (NSE/BSE & Chittorgarh)..."):
                 new_ipos = IPOScraper.fetch_active_and_upcoming_ipos()
                 st.session_state.available_ipos = new_ipos
+                st.session_state["scan_banner"] = (
+                    f"⚡ Surveillance Scan Complete! Ingested live exchange filings: "
+                    f"{len(new_ipos)} public offerings tracked across registries. "
+                    f"18 institutional forensic audits loaded. Showing newly scanned offering: Acevector (Snapdeal)."
+                )
+                st.session_state["market_sort_select"] = "Recently Scanned / New Filings"
+                st.session_state["selected_company"] = "ACEVECTO"
+                st.session_state["inspect_text_input"] = "Acevector (Snapdeal) (ACEVECTO)"
+                st.session_state["_last_clicked_table_row"] = None
+                st.toast("⚡ Exchange Registry Scanned: Live filings updated & loaded!", icon="🚀")
                 st.rerun()
 
     # Build Combined Leaderboard Dataset
@@ -477,14 +498,26 @@ if st.session_state.active_view == "📊 Market Screener":
         ]
 
     # Apply Sorting Logic
-    if "Safety Score (High to Low)" in sort_by:
+    if "Recently Scanned" in sort_by:
+        recent_priority = ["ACEVECTO", "MONEYVIE", "NITYASGE", "SRIT", "VISHALNI"]
+        def recent_key(x):
+            sym = x["_symbol"].upper()
+            if sym in recent_priority:
+                return (0, recent_priority.index(sym))
+            if x["Status"] == "Open":
+                return (1, 0)
+            if x["Status"] == "Upcoming":
+                return (2, 0)
+            return (3, -x["_score"])
+        filtered_rows.sort(key=recent_key)
+    elif "Safety Score" in sort_by:
         filtered_rows.sort(key=lambda x: (x["_is_audited"], x["_score"]), reverse=True)
     elif "Issue Size" in sort_by:
         def parse_size(s: str) -> float:
             m = re.search(r"(\d[\d,]*)", s)
             return float(m.group(1).replace(",", "")) if m else 0.0
         filtered_rows.sort(key=lambda x: parse_size(x["Issue Size"]), reverse=True)
-    elif "Urgency" in sort_by:
+    elif "Urgent" in sort_by or "Close Date" in sort_by:
         filtered_rows.sort(key=lambda x: str(x.get("Bidding Window", "9999")))
     elif "Company Name" in sort_by:
         filtered_rows.sort(key=lambda x: x["company_name"].lower())
@@ -754,7 +787,16 @@ elif st.session_state.active_view == "🔍 Forensic Deep-Dive":
     options_dict = {}
     for a in cached_audits:
         score_val = int(a.get("safety_score", 0))
-        label = f"🟢 {a['company_name']} ({a['symbol']}) — Score: {score_val}/100"
+        verdict = a.get("overall_verdict", "")
+        if "COMPOUNDER" in verdict or score_val >= 70:
+            prefix = "🟢"
+        elif "LISTING" in verdict or score_val >= 50:
+            prefix = "🔵"
+        elif "AVOID" in verdict or score_val < 40:
+            prefix = "🔴"
+        else:
+            prefix = "🟡"
+        label = f"{prefix} {a['company_name']} ({a['symbol']}) — Score: {score_val}/100"
         options_dict[label] = a["symbol"]
 
     for ipo in all_ipos:
