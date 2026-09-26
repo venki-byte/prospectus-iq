@@ -367,6 +367,10 @@ if st.session_state.active_view == "📊 Market Screener":
                 del st.session_state["scan_banner"]
                 st.rerun()
 
+    # Pre-widget pending state reconciliation (prevents StreamlitWidgetAlreadyInstantiatedError)
+    if "_pending_sort" in st.session_state:
+        st.session_state["market_sort_select"] = st.session_state.pop("_pending_sort")
+
     # 2. Search and Action Bar (3 columns)
     ctrl_col1, ctrl_col2, ctrl_col3 = st.columns([3, 2, 1.5])
     with ctrl_col1:
@@ -403,9 +407,9 @@ if st.session_state.active_view == "📊 Market Screener":
                     f"{len(new_ipos)} public offerings tracked across registries. "
                     f"18 institutional forensic audits loaded. Showing newly scanned offering: Acevector (Snapdeal)."
                 )
-                st.session_state["market_sort_select"] = "Recently Scanned / New Filings"
+                st.session_state["_pending_sort"] = "Recently Scanned / New Filings"
                 st.session_state["selected_company"] = "ACEVECTO"
-                st.session_state["inspect_text_input"] = "Acevector (Snapdeal) (ACEVECTO)"
+                st.session_state["_pending_inspect"] = "Acevector (Snapdeal) (ACEVECTO)"
                 st.session_state["_last_clicked_table_row"] = None
                 st.toast("⚡ Exchange Registry Scanned: Live filings updated & loaded!", icon="🚀")
                 st.rerun()
@@ -542,7 +546,11 @@ if st.session_state.active_view == "📊 Market Screener":
             st.session_state["_last_clicked_table_row"] = clicked_idx
             clicked_row = filtered_rows[clicked_idx]
             st.session_state.selected_company = clicked_row["_symbol"]
-            st.session_state["inspect_text_input"] = clicked_row["Company & Ticker"]
+            st.session_state["_pending_inspect"] = clicked_row["Company & Ticker"]
+
+    # Pre-widget pending inspect reconciliation (prevents StreamlitWidgetAlreadyInstantiatedError)
+    if "_pending_inspect" in st.session_state:
+        st.session_state["inspect_text_input"] = st.session_state.pop("_pending_inspect")
 
     curr_target_sym = st.session_state.get("selected_company", "NSE").upper()
     curr_target_row = symbol_to_row.get(curr_target_sym, combined_rows[0] if combined_rows else None)
@@ -676,7 +684,7 @@ if st.session_state.active_view == "📊 Market Screener":
                 if st.session_state.get("_last_clicked_table_row") != sel_idx:
                     st.session_state["_last_clicked_table_row"] = sel_idx
                     st.session_state["selected_company"] = target_sym
-                    st.session_state["inspect_text_input"] = target_name
+                    st.session_state["_pending_inspect"] = target_name
                     st.rerun()
 
                 st.write("")
