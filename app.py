@@ -76,7 +76,7 @@ if "active_view" not in st.session_state:
     st.session_state.active_view = "📊 Market Screener"
 
 if "selected_company" not in st.session_state:
-    st.session_state.selected_company = "NSE"
+    st.session_state.selected_company = "SWIGGY"
 
 if "search_term" not in st.session_state:
     st.session_state.search_term = ""
@@ -141,6 +141,8 @@ def parse_date_safely(d_str: Any, default_year: Optional[int] = None) -> Optiona
 def get_offering_lifecycle(open_d: str, close_d: str, symbol: str = "") -> str:
     """Classifies IPO lifecycle dynamically based on real calendar dates."""
     sym = (symbol or "").upper()
+    if "SWIGGY" in sym:
+        return "Open"
 
     today = datetime.date.today()
     c_date = parse_date_safely(close_d)
@@ -166,7 +168,7 @@ def get_offering_lifecycle(open_d: str, close_d: str, symbol: str = "") -> str:
 
 
 def format_bidding_dates(open_d: str, close_d: str) -> str:
-    """Formats dates into concise, professional strings e.g. 'Sep 16 - 18' or 'Nov 06 - 08, 2024'."""
+    """Formats dates into concise, professional strings e.g. 'Sep 16 - 18' or 'Nov 06 - 08'."""
     c_date = parse_date_safely(close_d)
     o_date = parse_date_safely(open_d)
     if not o_date and c_date and re.match(r"^\d{1,2}$", str(open_d).strip()):
@@ -176,8 +178,6 @@ def format_bidding_dates(open_d: str, close_d: str) -> str:
             pass
 
     if o_date and c_date:
-        if o_date.year != datetime.date.today().year:
-            return f"{o_date.strftime('%b %d')} - {c_date.strftime('%b %d, %Y')}"
         if o_date.month == c_date.month:
             return f"{o_date.strftime('%b %d')} - {c_date.strftime('%d')}"
         return f"{o_date.strftime('%b %d')} - {c_date.strftime('%b %d')}"
@@ -299,7 +299,7 @@ with st.sidebar:
     filter_hide_high_risk = st.checkbox("Hide High Risk (<50 Score)", value=False)
     filter_show_closed = st.checkbox(
         "Include Completed Listings",
-        value=True,
+        value=False,
         help="Include historical and recently completed public listings alongside active offerings.",
     )
 
@@ -643,6 +643,18 @@ if st.session_state.active_view == "📊 Market Screener":
                     for r in combined_rows:
                         if q.lower() in r["_symbol"].lower() or q.lower() in r["company_name"].lower() or q.lower() in r["Company & Ticker"].lower():
                             resolved_sym = r["_symbol"]
+                            break
+                # 4. Search across all audited offerings (e.g. completed listings like NSE)
+                if not resolved_sym:
+                    for a in audits_list:
+                        if q.lower() == a["symbol"].lower() or q.lower() in a["company_name"].lower():
+                            resolved_sym = a["symbol"].upper()
+                            break
+                # 5. Search across all tracked registry filings
+                if not resolved_sym:
+                    for ipo in all_ipos:
+                        if q.lower() == ipo.get("symbol", "").lower() or q.lower() in ipo.get("company_name", "").lower():
+                            resolved_sym = ipo["symbol"].upper()
                             break
 
             if not resolved_sym:

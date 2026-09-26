@@ -69,3 +69,4 @@ test_output.pdf
 *.tmp
 scratch/
 .tempmediaStorage/
+*.mp3

@@ -1,0 +1,21 @@
+Hi everyone, I'm Venkatakrishnan, and this is ProspectusIQ.
+
+For everyday investors, applying for an IPO often feels like gambling. Most of us just follow social media hype or famous brand names. But for big names like Swiggy or Hero Motors, the real dangers—like early investors cashing out billions and heavy cash burn—are hidden inside 600-page legal documents that everyday investors don't have time to read.
+
+That's why I built ProspectusIQ. Instead of basic chatbot summaries, it audits any IPO using a strict 12-Factor Forensic Rubric:
+First, Capital Integrity: Is your money funding real growth, or just letting insiders dump shares?
+Second, Earnings Quality: Are profits backed by actual cash flow, or just paper numbers?
+And third, Market and Valuation: Are you overpaying compared to peers, and what happens when the 30-day lock-in expires?
+
+Here is our live terminal.
+The screener automatically pulls active and upcoming listings. It is completely frictionless—no typing needed. I just click Swiggy right here in the table, and our AI engine—powered by Google Gemini—delivers the audit in seconds.
+
+Swiggy gets a cautious Listing Gains Only verdict. Look at this Divergence Card: while Reddit is hyped about the brand, our engine reveals heavy cash burn, and over 60% of the IPO is just insiders cashing out. High-risk companies like Manika Plastech get an immediate red AVOID warning with a score of 35.
+
+In contrast, inspecting the National Stock Exchange gives an outstanding 88 out of 100—marked as a true Long-Term Compounder with high profit margins and zero debt.
+And with one click, anyone can download this clean, 3-page institutional PDF report.
+
+Best of all, ProspectusIQ is live right now on Streamlit Cloud!
+You can find the direct link at the top of my GitHub repository at github.com/venki-byte/prospectus-iq and test any active IPO in your browser right now.
+
+ProspectusIQ levels the playing field for retail investors. Thank you!
